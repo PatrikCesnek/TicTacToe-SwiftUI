@@ -14,30 +14,35 @@ struct ContentView: View {
         NavigationStack {
             VStack {
                 ZStack {
-                    VStack(alignment: .leading, spacing: 32) {
-                        CellGroupView(
-                            newGame: !vm.gameStarted,
-                            isPlayer1: vm.isPlayer1,
-                            playerType: vm.fillCell(),
-                            changePlayers: vm.changePlayers
-                        )
-                        .onAppear {
-                            vm.startGame()
-                        }
+                    if vm.isLoading {
+                        SkeletonPlaceholderView(duration: vm.duration)
                         
-                        ScoreView(
-                            player1Score: vm.player1Score,
-                            player2Score: vm.player2Score
-                        )
-                        
-                        Spacer()
-                        
-                        RestartButtonView(restartAction: vm.restartGame)
-                        
-                        Spacer()
+                    } else {
+                        VStack(alignment: .leading, spacing: 32) {
+                            CellGroupView(
+                                newGame: !vm.gameStarted,
+                                isPlayer1: vm.isPlayer1,
+                                playerType: vm.fillCell(),
+                                changePlayers: vm.changePlayers
+                            )
+                            
+                            ScoreView(
+                                player1Score: vm.player1Score,
+                                player2Score: vm.player2Score
+                            )
+                            
+                            Spacer()
+                            
+                            RestartButtonView(restartAction: vm.restartGame)
+                            
+                            Spacer()
 
+                        }
                     }
                     
+                }
+                .onAppear {
+                    vm.startGame()
                 }
             }
             .navigationTitle("TicTacToe")

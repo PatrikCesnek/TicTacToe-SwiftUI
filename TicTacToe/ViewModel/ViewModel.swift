@@ -12,6 +12,8 @@ class ViewModel: ObservableObject {
     @Published var player1Score = 0
     @Published var player2Score = 0
     @Published var gameStarted = false
+    @Published var isLoading = true
+    let duration: Double = 1.5
     
     func fillCell() -> String {
         guard gameStarted else {
@@ -27,14 +29,18 @@ class ViewModel: ObservableObject {
     
     func startGame() {
         gameStarted = true
+        isLoading = false
     }
     
     func restartGame() {
         gameStarted = false
         player1Score = 0
         player2Score = 0
+        isLoading = true
         
-        //Somehow start game startGame()
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            self.startGame()
+        }
     }
     
     func changePlayers() {
