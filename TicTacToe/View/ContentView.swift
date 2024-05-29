@@ -14,30 +14,31 @@ struct ContentView: View {
         NavigationStack {
             VStack {
                 ZStack {
-                    if vm.isLoading {
-                        SkeletonPlaceholderView(duration: vm.duration)
-                        
-                    } else {
-                        VStack(alignment: .leading, spacing: 32) {
+                    
+                    VStack(alignment: .leading, spacing: 32) {
+                        if vm.isLoading {
+                            SkeletonPlaceholderView(duration: vm.duration)
+                            
+                        } else {
                             CellGroupView(
                                 newGame: !vm.gameStarted,
                                 isPlayer1: vm.isPlayer1,
                                 playerType: vm.fillCell(),
                                 changePlayers: vm.changePlayers
                             )
-                            
-                            ScoreView(
-                                player1Score: vm.player1Score,
-                                player2Score: vm.player2Score
-                            )
-                            
-                            Spacer()
-                            
-                            RestartButtonView(restartAction: vm.restartGame)
-                            
-                            Spacer()
-
                         }
+                        
+                        ScoreView(
+                            player1Score: vm.player1Score,
+                            player2Score: vm.player2Score
+                        )
+                        
+                        Spacer()
+                        
+                        RestartButtonView(restartAction: vm.restartGame)
+                        
+                        Spacer()
+                        
                     }
                     
                 }

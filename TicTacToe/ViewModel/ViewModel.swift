@@ -34,8 +34,6 @@ class ViewModel: ObservableObject {
     
     func restartGame() {
         gameStarted = false
-        player1Score = 0
-        player2Score = 0
         isLoading = true
         
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {

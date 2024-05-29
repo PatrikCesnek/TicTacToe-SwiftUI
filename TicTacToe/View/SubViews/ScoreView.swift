@@ -23,8 +23,8 @@ struct ScoreView: View {
                     .font(.system(size: 24, weight: .black))
                 
                 VStack {
-                    Text("Player 1: \(player1Score)")
-                    Text("Player 2: \(player2Score)")
+                    Text("Player 1: \(String(format: "%03d", player1Score))")
+                    Text("Player 2: \(String(format: "%03d", player2Score))")
                 }
                 .font(.system(size: 24, weight: .semibold))
             }
