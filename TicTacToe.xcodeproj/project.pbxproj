@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		02182B172BFE8535005FBB8B /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02182B162BFE8535005FBB8B /* ScoreView.swift */; };
 		02182B192BFF8A74005FBB8B /* RestartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02182B182BFF8A74005FBB8B /* RestartButtonView.swift */; };
+		02182B1D2BFFAB3C005FBB8B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02182B1C2BFFAB3C005FBB8B /* ViewModel.swift */; };
+		02182B1F2C04F2ED005FBB8B /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02182B1E2C04F2ED005FBB8B /* SkeletonView.swift */; };
+		02182B212C04F390005FBB8B /* SkeletonPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02182B202C04F390005FBB8B /* SkeletonPlaceholderView.swift */; };
 		02C17C7D2BBD89BA00F9FE49 /* TicTacToeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C17C7C2BBD89BA00F9FE49 /* TicTacToeApp.swift */; };
 		02C17C7F2BBD89BA00F9FE49 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C17C7E2BBD89BA00F9FE49 /* ContentView.swift */; };
 		02C17C812BBD89BB00F9FE49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02C17C802BBD89BB00F9FE49 /* Assets.xcassets */; };
@@ -40,6 +43,9 @@
 /* Begin PBXFileReference section */
 		02182B162BFE8535005FBB8B /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		02182B182BFF8A74005FBB8B /* RestartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestartButtonView.swift; sourceTree = "<group>"; };
+		02182B1C2BFFAB3C005FBB8B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		02182B1E2C04F2ED005FBB8B /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
+		02182B202C04F390005FBB8B /* SkeletonPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonPlaceholderView.swift; sourceTree = "<group>"; };
 		02C17C792BBD89BA00F9FE49 /* TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02C17C7C2BBD89BA00F9FE49 /* TicTacToeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeApp.swift; sourceTree = "<group>"; };
 		02C17C7E2BBD89BA00F9FE49 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -84,8 +90,36 @@
 			children = (
 				02182B162BFE8535005FBB8B /* ScoreView.swift */,
 				02182B182BFF8A74005FBB8B /* RestartButtonView.swift */,
+				02182B202C04F390005FBB8B /* SkeletonPlaceholderView.swift */,
 			);
 			path = SubViews;
+			sourceTree = "<group>";
+		};
+		02182B1A2BFFAB16005FBB8B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				02C17C7E2BBD89BA00F9FE49 /* ContentView.swift */,
+				02182B152BFE8529005FBB8B /* SubViews */,
+				02C17CA92BBD8A2A00F9FE49 /* Cell */,
+				02C17CA62BBD89F100F9FE49 /* CellGroup */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		02182B1B2BFFAB2A005FBB8B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				02182B1C2BFFAB3C005FBB8B /* ViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		02182B222C04F3AA005FBB8B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				02182B1E2C04F2ED005FBB8B /* SkeletonView.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		02C17C702BBD89BA00F9FE49 = {
@@ -112,10 +146,9 @@
 			isa = PBXGroup;
 			children = (
 				02C17C7C2BBD89BA00F9FE49 /* TicTacToeApp.swift */,
-				02C17C7E2BBD89BA00F9FE49 /* ContentView.swift */,
-				02182B152BFE8529005FBB8B /* SubViews */,
-				02C17CA92BBD8A2A00F9FE49 /* Cell */,
-				02C17CA62BBD89F100F9FE49 /* CellGroup */,
+				02182B1A2BFFAB16005FBB8B /* View */,
+				02182B1B2BFFAB2A005FBB8B /* ViewModel */,
+				02182B222C04F3AA005FBB8B /* Extensions */,
 				02C17C802BBD89BB00F9FE49 /* Assets.xcassets */,
 				02C17C822BBD89BB00F9FE49 /* Preview Content */,
 			);
@@ -293,12 +326,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02182B212C04F390005FBB8B /* SkeletonPlaceholderView.swift in Sources */,
 				02C17CAB2BBD8A3500F9FE49 /* CellView.swift in Sources */,
 				02C17C7F2BBD89BA00F9FE49 /* ContentView.swift in Sources */,
 				02182B192BFF8A74005FBB8B /* RestartButtonView.swift in Sources */,
 				02C17CA82BBD8A2100F9FE49 /* CellGroupView.swift in Sources */,
 				02C17C7D2BBD89BA00F9FE49 /* TicTacToeApp.swift in Sources */,
+				02182B1F2C04F2ED005FBB8B /* SkeletonView.swift in Sources */,
 				02182B172BFE8535005FBB8B /* ScoreView.swift in Sources */,
+				02182B1D2BFFAB3C005FBB8B /* ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
