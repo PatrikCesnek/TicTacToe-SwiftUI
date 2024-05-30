@@ -27,6 +27,14 @@ class ViewModel: ObservableObject {
         }
     }
     
+    func addScoreToWinner(player1Won: Bool, player2Won: Bool) {
+        if player1Won {
+            player1Score += 100
+        } else if player2Won {
+            player2Score += 100
+        }
+    }
+    
     func startGame() {
         gameStarted = true
         isLoading = false

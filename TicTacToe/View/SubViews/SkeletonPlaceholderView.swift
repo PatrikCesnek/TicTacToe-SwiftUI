@@ -27,18 +27,6 @@ struct SkeletonPlaceholderView: View {
                 }
             }
             .padding(16)
-            
-//            ScoreView(
-//                player1Score: 0,
-//                player2Score: 0
-//            )
-//            
-//            Spacer()
-//            
-//            RestartButtonView(restartAction: {})
-//            
-//            Spacer()
-
         }
         .opacity(0.6)
         .blinking(duration: duration)
