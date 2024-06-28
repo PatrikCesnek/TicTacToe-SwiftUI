@@ -37,6 +37,7 @@ class ViewModel: ObservableObject {
     
     func startGame() {
         gameStarted = true
+        isPlayer1 = true
         isLoading = false
     }
     

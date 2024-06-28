@@ -43,11 +43,24 @@ struct CellView: View {
                         
                         Text(newGame ? "" : placeholder)
                             .font(.system(size: 40, weight: .bold))
+                            .foregroundStyle(getColor(placeholder: placeholder))
                         }
                 }
             }
         )
         .disabled(isDisabled)
+    }
+    
+    private func getColor(placeholder: String?) -> Color {
+        guard let placeholder = placeholder else {
+            return .primary
+        }
+            
+        if placeholder == "X" {
+            return .red
+        } else {
+            return .blue
+        }
     }
 }
 
@@ -55,7 +68,7 @@ struct CellView: View {
     CellView(
         newGame: false,
         isPlayer1: true,
-        playerType: "X",
+        playerType: "X", 
         changePlayers: {}
     )
 }
