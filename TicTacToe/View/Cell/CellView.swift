@@ -8,55 +8,41 @@
 import SwiftUI
 
 struct CellView: View {
-    @State private var placeholder = ""
-    @State private var isDisabled = false
-    private let newGame: Bool
-    private let isPlayer1: Bool
-    private let playerType: String
-    private let changePlayers: () -> Void
-    
-    init(
-        newGame: Bool,
-        isPlayer1: Bool,
-        playerType: String,
-        changePlayers: @escaping () -> Void
-    ) {
-        self.newGame = newGame
-        self.playerType = playerType
-        self.isPlayer1 = isPlayer1
-        self.changePlayers = changePlayers
-    }
+    let constants = Constants.init()
+    var player: Player
     
     var body: some View {
-        Button(
-            action: {
-                placeholder = playerType
-                isDisabled = true
-                changePlayers()
-            },
-            label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.gray)
-                    VStack {
-                        // either Image(systemName: "xmark") or Image(systemName: "circle")
-                        
-                        Text(newGame ? "" : placeholder)
-                            .font(.system(size: 40, weight: .bold))
-                            .foregroundStyle(getColor(placeholder: placeholder))
-                        }
-                }
+        ZStack {
+            RoundedRectangle(cornerRadius: 16)
+                .fill(constants.mainGreyColor)
+                .aspectRatio(1.0, contentMode: .fit)
+            
+            VStack {
+                Text(playerSymbol)
+                    .font(.system(size: 60, weight: .bold))
+                    .foregroundStyle(getColor(player: player))
+                    .shadow(color: constants.mainShadowColor, radius: 1, x: 0.5, y: 0.5)
             }
-        )
-        .disabled(isDisabled)
+        }
     }
     
-    private func getColor(placeholder: String?) -> Color {
-        guard let placeholder = placeholder else {
+    private var playerSymbol: String {
+        switch player {
+        case .none:
+            return ""
+        case .x:
+            return "X"
+        case .o:
+            return "O"
+        }
+    }
+    
+    private func getColor(player: Player?) -> Color {
+        guard let player = player else {
             return .primary
         }
-            
-        if placeholder == "X" {
+        
+        if player == .x {
             return .red
         } else {
             return .blue
@@ -65,10 +51,5 @@ struct CellView: View {
 }
 
 #Preview {
-    CellView(
-        newGame: false,
-        isPlayer1: true,
-        playerType: "X", 
-        changePlayers: {}
-    )
+    CellView(player: Player.x)
 }

@@ -7,9 +7,21 @@
 
 import SwiftUI
 
-struct Player {
-    let symbol: String
-    let color: Color
-    let isWinner: Bool
-    let score: Int
+enum Player {
+    case none
+    case x
+    case o
+}
+
+struct TicTacToe {
+    private(set) var board: [[Player]]
+    
+    init() {
+        board = Array(repeating: Array(repeating: .none, count: 3), count: 3)
+    }
+    
+    mutating func makeMove(at row: Int, column: Int, player: Player) {
+        guard board[row][column] == .none else { return }
+        board[row][column] = player
+    }
 }

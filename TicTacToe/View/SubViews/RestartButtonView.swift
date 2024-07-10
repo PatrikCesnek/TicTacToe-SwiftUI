@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RestartButtonView: View {
+    let constants = Constants.init()
     private let restartAction: () -> Void
     
     init(restartAction: @escaping () -> Void) {
@@ -25,11 +26,12 @@ struct RestartButtonView: View {
                         Text("Restart")
                             .font(.system(size: 18, weight: .semibold))
                     }
-                    .frame(width: 120, height: 40)
-                    
+                    .frame(width: 160, height: 30)
                 }
             )
             .buttonStyle(.borderedProminent)
+            .clipShape(Capsule())
+            .shadow(color: constants.mainShadowColor, radius: 3, x: 1, y: 1)
             
             Spacer()
         }

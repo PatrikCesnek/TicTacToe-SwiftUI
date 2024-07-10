@@ -8,49 +8,44 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var vm = ViewModel()
+    @StateObject private var viewModel = TicTacToeViewModel()
     
     var body: some View {
         NavigationStack {
-            VStack {
-                ZStack {
-                    
-                    VStack(alignment: .leading, spacing: 32) {
-                        if vm.isLoading {
-                            SkeletonPlaceholderView(duration: vm.duration)
-                            
-                        } else {
-                            CellGroupView(
-                                newGame: !vm.gameStarted,
-                                isPlayer1: vm.isPlayer1,
-                                playerType: vm.fillCell(),
-                                changePlayers: vm.changePlayers
-                            )
+            VStack(spacing: 32) {
+                Spacer()
+                
+                Text("Current Player: \(viewModel.currentPlayer == .x ? "X" : "O")")
+                    .font(.title)
+                    .padding()
+                                
+                VStack(spacing: 8) {
+                    ForEach(0..<3, id: \.self) { row in
+                        HStack(spacing: 8) {
+                            ForEach(0..<3, id: \.self) { col in
+                                CellView(player: viewModel.board[row][col])
+                                    .onTapGesture {
+                                        viewModel.makeMove(at: row, column: col, player: viewModel.currentPlayer)
+                                        let winner = viewModel.checkWinner()
+                                        if winner != .none {
+                                            print("\(winner) wins!")
+                                        }
+                                    }
+                            }
                         }
-                        
-                        ScoreView(
-                            player1Score: vm.player1Score,
-                            player2Score: vm.player2Score
-                        )
-                        
-                        Spacer()
-                        
-                        RestartButtonView(restartAction: vm.restartGame)
-                        
-                        Spacer()
-                        
                     }
-                    
                 }
-                .onAppear {
-                    vm.startGame()
-                }
+                .padding([.horizontal, .bottom], 16)
+                                
+                RestartButtonView(restartAction: viewModel.restartGame)
+                
+                Spacer()
+                                
             }
-            .navigationTitle("TicTacToe")
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
+
 
 #Preview {
     ContentView()
