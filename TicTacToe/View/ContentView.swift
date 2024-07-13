@@ -28,7 +28,7 @@ struct ContentView: View {
                                         viewModel.makeMove(at: row, column: col, player: viewModel.currentPlayer)
                                         let winner = viewModel.checkWinner()
                                         if winner != .none {
-                                            print("\(winner) wins!")
+                                            viewModel.showAlert(winner: winner)
                                         }
                                     }
                             }
@@ -42,6 +42,13 @@ struct ContentView: View {
                 Spacer()
                                 
             }
+            .alert(
+                viewModel.alertText,
+                isPresented: $viewModel.isShowingAlert,
+                actions: {
+                    RestartButtonView(restartAction: viewModel.restartGame)
+                }
+            )
         }
     }
 }

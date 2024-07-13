@@ -10,6 +10,8 @@ import SwiftUI
 class TicTacToeViewModel: ObservableObject {
     @Published private var game = TicTacToe()
     @Published private(set) var currentPlayer: Player = .x
+    @Published var isShowingAlert = false
+    var alertText = ""
     
     var board: [[Player]] {
         return game.board
@@ -28,21 +30,6 @@ class TicTacToeViewModel: ObservableObject {
     func checkWinner() -> Player {
         return determineWinner(board: game.board)
     }
-    
-//    func addScore() {
-//        let winner = checkWinner()
-//        
-//        guard winner != .none else {
-//            print("It's a draw, no points for anyone!")
-//            return
-//        }
-//        
-//        if winner == .x {
-//            print("The winner is Player X, score + 100")
-//        } else {
-//            print("The winner is Player 0, score + 100")
-//        }
-//    }
     
     private func determineWinner(board: [[Player]]) -> Player {
         for row in 0..<3 {
@@ -67,8 +54,15 @@ class TicTacToeViewModel: ObservableObject {
         return .none
     }
     
+    func showAlert(winner: Player) {
+        isShowingAlert = true
+        alertText = "The winner is: \(winner)"
+    }
+    
     func restartGame() {
         game = TicTacToe()
         currentPlayer = .x
+        isShowingAlert = false
+        alertText = ""
     }
 }
