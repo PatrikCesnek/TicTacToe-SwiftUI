@@ -25,6 +25,13 @@ class TicTacToeViewModel: ObservableObject {
         } else {
             currentPlayer = .x
         }
+        
+        let winner = checkWinner()
+        if winner != .none {
+            showAlert(winner: winner)
+        } else if isBoardFull() {
+            showAlert(winner: .none)
+        }
     }
     
     func checkWinner() -> Player {
@@ -54,9 +61,24 @@ class TicTacToeViewModel: ObservableObject {
         return .none
     }
     
+    private func isBoardFull() -> Bool {
+        for row in 0..<3 {
+            for col in 0..<3 {
+                if board[row][col] == .none {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+    
     func showAlert(winner: Player) {
         isShowingAlert = true
-        alertText = "The winner is: \(winner)"
+        if winner != .none {
+            alertText = "The winner is: \(winner)"
+        } else {
+            alertText = "It is a draw!"
+        }
     }
     
     func restartGame() {
